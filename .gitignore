@@ -1,0 +1,20 @@
+.DS_Store
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+.sites-runtime/
+*.blend1
+*.blend2
+/apple_video/frames/
+/apple_video/capture.html
+/apple_video/video_check.jpg
+
+# Separate local projects and their temporary exports.
+/luo/
+/luo-upgrade/
+/tmp/
+/output/
+/*.zip

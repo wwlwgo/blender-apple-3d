@@ -1,0 +1,12 @@
+import { build } from 'esbuild';
+import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('.', import.meta.url));
+const result = await build({entryPoints:[root+'src/main.js'],bundle:true,minify:true,format:'iife',target:'es2020',write:false,legalComments:'eof'});
+const template = await readFile(root+'src/page.html','utf8');
+const model = await readFile(root+'../first_apple/apple.glb');
+const html = template.replace('__APPLE_BASE64__',model.toString('base64')).replace('__APP_BUNDLE__',()=>result.outputFiles[0].text.replace(/<\/script/gi,'<\\/script'));
+await mkdir(root+'dist',{recursive:true});
+await writeFile(root+'dist/index.html',html);
+await copyFile(root+'node_modules/three/LICENSE',root+'dist/THREE-LICENSE.txt');
+console.log(`Built dist/index.html (${(Buffer.byteLength(html)/1024/1024).toFixed(2)} MB), including the model and Three.js. No external assets required.`);

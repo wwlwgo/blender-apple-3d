@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="在双侧斜射光下旋转查看一个真实的三维苹果模型。">
+  <title>苹果 · 双侧光照</title>
+  <style>
+    :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#f5f2ed;background:#101216;color-scheme:dark}
+    *{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}
+    main{position:relative;height:100svh;min-height:560px;overflow:hidden;background:#101216}
+    #viewport{position:absolute;inset:0}canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}canvas:focus-visible{outline:2px solid #c0cedf;outline-offset:-5px}
+    header{position:absolute;left:clamp(24px,5vw,80px);top:clamp(25px,5vh,56px);pointer-events:none}
+    .eyebrow{font-size:12px;letter-spacing:.19em;color:#9da6b3;margin:0 0 13px}h1{font-size:clamp(28px,4vw,45px);font-weight:450;letter-spacing:.06em;margin:0;line-height:1.2}
+    .caption{margin:12px 0 0;color:#a5abb5;font-size:14px;line-height:1.6}
+    .instructions{position:absolute;right:clamp(24px,5vw,80px);top:clamp(25px,5vh,56px);font-size:14px;color:#a5abb5;text-align:right;line-height:1.8;pointer-events:none}
+    .controls{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:28px;padding:18px 22px;border:1px solid #ffffff18;border-radius:16px;background:#181c24de;backdrop-filter:blur(16px);max-width:calc(100% - 32px)}
+    .light-control{display:grid;grid-template-columns:auto auto;gap:10px 18px;min-width:140px;font-size:14px;color:#dce0e6}
+    output{text-align:right;font-variant-numeric:tabular-nums;color:#9da6b3}.warm{accent-color:#edc69e}.cool{accent-color:#bad5fa}
+    input[type=range]{grid-column:1/-1;margin:0;width:150px;height:18px;cursor:pointer}
+    .buttons{display:flex;gap:8px;border-left:1px solid #ffffff16;padding-left:24px}
+    button{border:1px solid #ffffff20;border-radius:9px;background:#ffffff08;color:#eceff3;padding:11px 15px;white-space:nowrap;font-size:14px;min-height:44px}
+    button:hover{background:#ffffff13}button[aria-pressed=true]{background:#d8e3f0;color:#17212f}button:focus-visible,input:focus-visible{outline:2px solid #e6ca9e;outline-offset:5px}
+    #status{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:80%;padding:16px 22px;border-radius:12px;background:#151b24e6;color:#d8dee9;font-size:16px;text-align:center;line-height:1.7}#status[hidden]{display:none}
+    .footnote{position:absolute;left:clamp(24px,5vw,80px);bottom:35px;color:#747d8b;font-size:12px;letter-spacing:.12em;pointer-events:none}
+    @media(max-width:900px){.footnote{display:none}.controls{gap:18px}.buttons{padding-left:18px}input[type=range]{width:125px}.light-control{min-width:125px}}
+    @media(max-width:600px){main{min-height:650px}header{top:26px}.instructions{top:28px;font-size:12px}.caption{max-width:210px}.controls{bottom:16px;display:grid;grid-template-columns:1fr 1fr;width:calc(100% - 32px);padding:16px 20px;gap:16px 22px}.light-control{min-width:0}input[type=range]{width:100%}.buttons{grid-column:1/-1;justify-content:center;border:0;border-top:1px solid #ffffff16;padding:14px 0 0}button{flex:1}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<main>
+  <div id="viewport"></div>
+  <header><p class="eyebrow">LIGHT STUDY / 01</p><h1>苹果</h1><p class="caption">两束斜光，一颗立体的苹果。</p></header>
+  <div class="instructions">拖动旋转 · 滚轮缩放<br>触屏：单指旋转 · 双指缩放</div>
+  <div id="status" role="status" aria-live="polite">正在载入苹果…</div>
+  <section class="controls" aria-label="光照与视角">
+    <label class="light-control" for="leftLight"><span>左上方 · 暖光</span><output id="leftValue" for="leftLight">100%</output><input class="warm" id="leftLight" type="range" min="0" max="150" value="100" aria-label="左上方暖光强度"></label>
+    <label class="light-control" for="rightLight"><span>右上方 · 冷光</span><output id="rightValue" for="rightLight">100%</output><input class="cool" id="rightLight" type="range" min="0" max="150" value="100" aria-label="右上方冷光强度"></label>
+    <div class="buttons"><button id="rotate" type="button" aria-pressed="false">自动旋转</button><button id="reset" type="button">重置视角</button></div>
+  </section>
+  <span class="footnote">APPLE / 3D</span>
+  <noscript><p style="position:absolute;top:40%;left:10%;right:10%">需要在浏览器中启用 JavaScript 才能显示三维苹果。</p></noscript>
+</main>
+<script id="apple-data" type="application/octet-stream">__APPLE_BASE64__</script>
+<script>__APP_BUNDLE__</script>
+</body>
+</html>
